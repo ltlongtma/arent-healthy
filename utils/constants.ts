@@ -1,5 +1,11 @@
+import { isLoggedIn } from "@/utils/auth";
+
 export const ROUTE = {
-  HOME: "/",
+  HOME: isLoggedIn() ? "/dashboard" : "/",
+  DASHBOARD: "/dashboard",
+  RECORDS: "/records",
+  LOGIN: "/login",
+  REGISTER: "#",
 };
 
 export const NAVIGATION = [
@@ -23,29 +29,29 @@ export const NAVIGATION = [
 export const MENU_DROPDOWN = [
   {
     name: " 自分の記録",
-    route: "/records",
+    route: "#",
   },
   {
     name: "体重グラフ",
-    route: "/graph",
+    route: "#",
   },
   {
     name: "目標",
-    route: "/goals",
+    route: "#",
   },
   {
     name: "選択中のコース",
-    route: "/course",
+    route: "#",
   },
   {
     name: "コラム一覧",
-    route: "/columns",
+    route: "#",
   },
   {
     name: "設定",
-    route: "/settings",
-  }
-]
+    route: "#",
+  },
+];
 
 export const FOOTER_LINKS = [
   { name: "会員登録", route: "/register" },
@@ -55,5 +61,3 @@ export const FOOTER_LINKS = [
   { name: "特定商取引法に基づく表記", route: "/legal" },
   { name: "お問い合わせ", route: "/contact" },
 ];
-
-

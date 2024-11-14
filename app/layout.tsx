@@ -2,8 +2,8 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import { Noto_Sans_JP } from "next/font/google";
 import "./globals.css";
-import Footer from "@/app/components/Footer";
-import Header from "@/app/components/Header";
+import LayoutWrapper from "@/app/components/LayoutWrapper";
+import { Toaster } from "sonner";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -19,8 +19,8 @@ const notoSansJP = Noto_Sans_JP({
 });
 
 export const metadata: Metadata = {
-  title: "Healthy | A healthy lifestyle",
-  description: "A healthy lifestyle",
+  title: "Healthy | A Healthy Lifestyle",
+  description: "A Healthy Lifestyle",
   icons: {
     icon: [
       { url: "/favicon/favicon.icon", type: "image/x-icon" },
@@ -51,9 +51,8 @@ export default function RootLayout({
   return (
     <html lang="ja" className={`${inter.variable} ${notoSansJP.variable}`}>
       <body className="font-sans antialiased">
-        <Header />
-        {children}
-        <Footer />
+        <Toaster position="top-right" richColors />
+        <LayoutWrapper>{children}</LayoutWrapper>
       </body>
     </html>
   );
