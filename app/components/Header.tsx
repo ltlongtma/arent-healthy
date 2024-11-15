@@ -3,6 +3,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { MENU_DROPDOWN, NAVIGATION, ROUTE } from "@/utils/constants";
 import { useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
 
 import {
   DropdownMenu,
@@ -16,6 +17,11 @@ import { toast } from "sonner";
 
 export default function Header() {
   const router = useRouter();
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   const handleLogout = () => {
     removeLoginCookie();
@@ -24,10 +30,23 @@ export default function Header() {
     toast.success("ログアウトしました");
   };
 
+  const handleHomeClick = () => {
+    if (isLoggedIn()) {
+      router.push(ROUTE.DASHBOARD);
+    } else {
+      router.push(ROUTE.HOME);
+    }
+  };
+
+  if (!mounted) return null;
+
   return (
     <header className="bg-primary-dark-gray text-white p-4 h-[84px]">
       <nav className="container mx-auto flex justify-between items-center px-10">
-        <Link href={ROUTE.HOME}>
+        <Link href={ROUTE.HOME} onClick={(e) => {
+          e.preventDefault();
+          handleHomeClick();
+        }}>
           <Image src="/logo.png" alt="logo" width={144} height={64} priority />
         </Link>
 

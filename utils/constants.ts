@@ -1,7 +1,5 @@
-import { isLoggedIn } from "@/utils/auth";
-
 export const ROUTE = {
-  HOME: isLoggedIn() ? "/dashboard" : "/",
+  HOME: "/",
   DASHBOARD: "/dashboard",
   RECORDS: "/records",
   LOGIN: "/login",
@@ -45,7 +43,7 @@ export const MENU_DROPDOWN = [
   },
   {
     name: "コラム一覧",
-    route: "#",
+    route: "/",
   },
   {
     name: "設定",
