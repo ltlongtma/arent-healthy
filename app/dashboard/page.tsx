@@ -5,6 +5,7 @@ import { useState } from "react";
 import { motion } from "framer-motion";
 import { FILTERS_BUTTON, MEALS } from "@/mock-data/dashboard";
 import dayjs from "dayjs";
+import BodyRecordChart from "@/app/components/BodyRecordChart";
 
 export default function DashboardPage() {
   const [selectedFilter, setSelectedFilter] = useState<string>("all");
@@ -65,12 +66,7 @@ export default function DashboardPage() {
 
         {/* Graph Section */}
         <div className="sm:col-span-6 col-span-10 h-full relative">
-          <Image
-            src="/images/column-8.jpg"
-            alt="Achievement Rate"
-            fill
-            className="object-cover"
-          />
+          <BodyRecordChart />
         </div>
       </div>
 
