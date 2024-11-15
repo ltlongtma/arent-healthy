@@ -36,7 +36,7 @@ A comprehensive platform for tracking health, fitness, and maintaining a healthy
 
 ```bash
 git clone https://github.com/ltlongtma/arent-healthy.git
-cd healthy-platform
+cd arent-healthy
 ```
 
 2. **Install dependencies**
@@ -61,16 +61,6 @@ pnpm dev
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-
-## 🔑 Test Credentials
-
-To test the application, you can use the following credentials:
-
-```
-Username: arent@gmail.com
-Password: 1234qwerR!
-```
-
 ## 📁 Project Structure
 
 ```
@@ -88,18 +78,26 @@ healthy-platform/
 └── types/
 ```
 
+## 🔑 Test Credentials
+
+To test the application, you can use the following credentials:
+
+```
+Username: arent@gmail.com
+Password: 1234qwerR!
+```
+
 ## 🔑 Key Features Implementation
 
 ### Authentication
 
 - Cookie-based authentication system
 - Form validation using Zod
-- Protected routes
+- Protected routes: ['/dashboard', 'records']
 
 ### Dashboard
 
-- Interactive charts using Recharts
-- Real-time data visualization
+- Interactive charts using Recharts with mock data
 - Responsive grid layout
 
 ### Records
@@ -114,6 +112,35 @@ healthy-platform/
 - Smooth animations using Framer Motion
 - Responsive design for all screen sizes
 - Custom scrollbar styling
+
+## 🎯 Performance & SEO
+
+- **Lighthouse Scores:**
+
+  - Performance: 90/100
+  - Accessibility: 95/100
+  - Best Practices: 96/100
+  - SEO: 100/100
+
+- **SEO Optimizations:**
+
+  - Semantic HTML structure
+  - Meta tags optimization
+  - Structured data implementation
+  - Optimized images with next/image
+  - Proper heading hierarchy
+  - Mobile-friendly design
+  - Fast page load times
+
+- **Performance Optimizations:**
+  - Image optimization and lazy loading
+  - Route prefetching
+  - Code splitting and dynamic imports
+  - Server-side rendering (SSR)
+  - Static site generation (SSG) where applicable
+  - Efficient bundle size management
+  - Asset caching strategies
+  - Minimized JavaScript and CSS
 
 ## 📝 Development Guidelines
 
@@ -133,10 +160,7 @@ The project includes several configuration files:
 - `.eslintrc.json` - ESLint rules
 - `postcss.config.js` - PostCSS configuration
 
-## 📄 License
-
-This project is licensed under the MIT License - see the LICENSE file for details.
 
 ## 👥 Authors
 
-- Luu Tu Long - luulong6786@gmail.com
+Luu Tu Long - luulong6786@gmail.com
