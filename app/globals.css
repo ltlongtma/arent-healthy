@@ -29,10 +29,11 @@
     --chart-4: 43 74% 66%;
     --chart-5: 27 87% 67%;
     --radius: 0.5rem;
-    --color-primary-orange: #FF963C;
+    --color-primary-orange: #ff963c;
+    --color-primary-yellow: #ffcc21;
     --color-primary-dark-gray: #414141;
-    --color-primary-light-gray: #2E2E2E;
-    --color-primary-background: #F2F2F2;
+    --color-primary-light-gray: #2e2e2e;
+    --color-primary-background: #f2f2f2;
   }
   .dark {
     --background: 0 0% 3.9%;
@@ -60,12 +61,12 @@
     --chart-4: 280 65% 60%;
     --chart-5: 340 75% 55%;
   }
-  
+
   /* Apply fonts by language */
   :lang(ja) {
     font-family: var(--font-noto-sans-jp);
   }
-  
+
   /* Numbers and English text */
   .font-en {
     font-family: var(--font-inter);
@@ -84,10 +85,31 @@
 @layer components {
   .container {
     @apply mx-auto px-4;
-    max-width: 1280px; 
+    max-width: 1280px;
   }
 }
 
 .clip-path-hexagon {
   clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+}
+
+@layer utilities {
+  .scrollbar::-webkit-scrollbar {
+    width: 6px;
+  }
+
+  .scrollbar::-webkit-scrollbar-track {
+    background: #777777;
+    border-radius: 3px;
+  }
+
+  .scrollbar::-webkit-scrollbar-thumb {
+    background: var(--color-primary-yellow);
+    border-radius: 3px;
+  }
+
+  .scrollbar::-webkit-scrollbar-thumb:hover {
+    background: var(--color-primary-yellow);
+    opacity: 0.8;
+  }
 }

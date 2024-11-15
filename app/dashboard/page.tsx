@@ -38,13 +38,19 @@ export default function DashboardPage() {
             alt="Achievement Rate"
             fill
             objectFit="cover"
+            priority
           />
           {/* Achievement Circle Overlay */}
           <div className="absolute inset-0 flex items-center justify-center">
             <div className="relative w-[181px] h-[181px] flex items-center justify-center">
-              {/* Add white border circle with gap */}
-              <svg className="absolute inset-0 w-full h-full -rotate-90">
-                <circle
+              {/* Animated circle */}
+              <motion.svg
+                className="absolute inset-0 w-full h-full -rotate-90"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ duration: 0.5 }}
+              >
+                <motion.circle
                   cx="90.5"
                   cy="90.5"
                   r="88.5"
@@ -52,14 +58,21 @@ export default function DashboardPage() {
                   strokeWidth="4"
                   fill="none"
                   strokeDasharray="556"
-                  strokeDashoffset="139" // Adjust this value to control the gap (25% of 556)
+                  initial={{ strokeDashoffset: "556" }}
+                  animate={{ strokeDashoffset: "139" }}
+                  transition={{ duration: 1.5, ease: "easeInOut" }}
                 />
-              </svg>
+              </motion.svg>
               {/* Achievement text */}
-              <div className="text-white text-center z-10">
+              <motion.div
+                className="text-white text-center z-10"
+                initial={{ scale: 0 }}
+                animate={{ scale: 1 }}
+                transition={{ delay: 0.5, duration: 0.5 }}
+              >
                 <span className="text-lg font-inter">05/21</span>
                 <span className="text-[25px] ml-1 font-inter">75%</span>
-              </div>
+              </motion.div>
             </div>
           </div>
         </div>
@@ -73,25 +86,50 @@ export default function DashboardPage() {
       {/* Filter Buttons */}
       <div className="container mx-auto py-8">
         <div className="flex flex-wrap justify-center gap-4 md:gap-16 lg:gap-28 mb-8 px-10">
-          {FILTERS_BUTTON.map((button) => (
-            <button
+          {FILTERS_BUTTON.map((button, index) => (
+            <motion.button
               key={button.id}
               onClick={() => setSelectedFilter(button.id)}
               className={`w-[136px] h-[150px] clip-path-hexagon bg-gradient-to-r from-primary-yellow to-primary-orange flex flex-col items-center justify-center transition-transform hover:scale-105 font-inter ${
-                selectedFilter === button.id ? "ring-2 ring-primary-orange" : ""
+                selectedFilter === button.id
+                  ? "ring-2 ring-primary-orange"
+                  : ""
               }`}
+              initial={{ opacity: 0, scale: 0.8 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{
+                duration: 0.4,
+                delay: index * 0.15,
+                ease: "easeOut"
+              }}
+              whileHover={{ 
+                scale: 1.05,
+                transition: { duration: 0.2 } 
+              }}
+              whileTap={{ scale: 0.95 }}
             >
-              <Image
-                src={button.icon}
-                alt={button.label}
-                width={56}
-                height={56}
-                className="mb-2"
-              />
-              <span className="text-white text-xl capitalize font-inter">
+              <motion.div
+                initial={{ y: 10, opacity: 0 }}
+                animate={{ y: 0, opacity: 1 }}
+                transition={{ delay: index * 0.15 + 0.2 }}
+              >
+                <Image
+                  src={button.icon}
+                  alt={button.label}
+                  width={56}
+                  height={56}
+                  className="mb-2"
+                />
+              </motion.div>
+              <motion.span 
+                className="text-white text-xl capitalize font-inter"
+                initial={{ y: 10, opacity: 0 }}
+                animate={{ y: 0, opacity: 1 }}
+                transition={{ delay: index * 0.15 + 0.3 }}
+              >
                 {button.label}
-              </span>
-            </button>
+              </motion.span>
+            </motion.button>
           ))}
         </div>
 
@@ -105,7 +143,7 @@ export default function DashboardPage() {
           {filteredMeals.slice(0, visibleItems).map((meal, index) => (
             <motion.div
               key={meal.id}
-              className="relative h-[242px] cursor-pointer hover:opacity-90 transition-opacity"
+              className="relative h-[242px] cursor-pointer transition-opacity"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{
@@ -117,7 +155,7 @@ export default function DashboardPage() {
                 src={meal.image}
                 alt={`${meal.date} ${meal.type}`}
                 fill
-                className="object-cover"
+                className="object-cover hover:opacity-90"
               />
               <div className="absolute bottom-0 left-0 bg-primary-yellow text-white px-2 py-1 font-inter">
                 {dayjs(meal.date).format("MM.DD")}.

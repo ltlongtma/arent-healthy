@@ -9,7 +9,8 @@ import {
   CartesianGrid,
   ResponsiveContainer,
 } from "recharts";
-import dayjs from 'dayjs';
+import dayjs from "dayjs";
+import { motion } from "framer-motion";
 
 export default function BodyRecordChart() {
   const [selectedPeriod, setSelectedPeriod] = useState("year");
@@ -18,14 +19,14 @@ export default function BodyRecordChart() {
   const formatDate = () => {
     const date = dayjs();
     switch (selectedPeriod) {
-      case 'day':
-        return date.format('YYYY.MM.DD');
-      case 'week':
-      case 'month':
-        return date.format('YYYY.MM');
-      case 'year':
+      case "day":
+        return date.format("YYYY.MM.DD");
+      case "week":
+      case "month":
+        return date.format("YYYY.MM");
+      case "year":
       default:
-        return date.format('YYYY');
+        return date.format("YYYY");
     }
   };
 
@@ -35,16 +36,31 @@ export default function BodyRecordChart() {
   };
 
   return (
-    <div className="w-full bg-[#2E2E2E] p-4 text-white h-full flex flex-col justify-between">
-      <div className="flex items-center gap-4 mb-4">
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.5 }}
+      className="w-full bg-primary-dark-gray p-6 text-white h-full flex flex-col justify-between"
+    >
+      <motion.div
+        initial={{ opacity: 0, x: -20 }}
+        animate={{ opacity: 1, x: 0 }}
+        transition={{ duration: 0.5, delay: 0.2 }}
+        className="flex items-center gap-4 mb-4"
+      >
         <h2 className="text-xl uppercase">
           <span className="block">body</span>
           <span className="block">record</span>
         </h2>
         <span className="text-lg">{formatDate()}</span>
-      </div>
+      </motion.div>
 
-      <div className="h-[200px] w-full mb-4">
+      <motion.div
+        initial={{ opacity: 0, scale: 0.95 }}
+        animate={{ opacity: 1, scale: 1 }}
+        transition={{ duration: 0.5, delay: 0.3 }}
+        className="h-[200px] w-full mb-4"
+      >
         <ResponsiveContainer width="100%" height="100%">
           <LineChart
             data={data}
@@ -78,24 +94,37 @@ export default function BodyRecordChart() {
             />
           </LineChart>
         </ResponsiveContainer>
-      </div>
+      </motion.div>
 
-      <div className="flex gap-2">
-        {PERIOD_FILTERS.map((filter) => (
-          <button
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5, delay: 0.4 }}
+        className="flex gap-2"
+      >
+        {PERIOD_FILTERS.map((filter, index) => (
+          <motion.button
             key={filter.id}
             onClick={() => handlePeriodChange(filter.id)}
-            className={`w-14 h-8 rounded-full text-sm transition-colors
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{
+              duration: 0.3,
+              delay: 0.5 + index * 0.1,
+            }}
+            className={`w-14 h-6 rounded-full text-sm transition-colors
               ${
                 selectedPeriod === filter.id
-                  ? "bg-primary-orange text-white"
+                  ? "bg-primary-yellow text-white"
                   : "bg-white text-primary-orange"
               }`}
           >
             {filter.label}
-          </button>
+          </motion.button>
         ))}
-      </div>
-    </div>
+      </motion.div>
+    </motion.div>
   );
 }

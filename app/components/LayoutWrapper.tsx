@@ -6,6 +6,7 @@ import Footer from "./Footer";
 import ScrollToTop from "@/app/components/ScrollToTop";
 import { ROUTE } from "@/utils/constants";
 import { useEffect, useState } from "react";
+import Image from "next/image";
 
 export default function LayoutWrapper({
   children,
@@ -23,7 +24,17 @@ export default function LayoutWrapper({
   if (!mounted) {
     return (
       <div className="min-h-screen flex items-center justify-center">
-        <div className="w-6 h-6 border-2 border-primary-orange border-t-transparent rounded-full animate-spin" />
+        <div className="relative w-[150px] h-[150px] flex items-center justify-center">
+          <Image
+            src="/logo.png"
+            alt="logo"
+            width={144}
+            height={64}
+            priority
+            className="z-10"
+          />
+          <div className="absolute inset-[-8px] border-2 border-primary-orange border-t-transparent rounded-full animate-spin" />
+        </div>
       </div>
     );
   }
@@ -31,7 +42,7 @@ export default function LayoutWrapper({
   return (
     <>
       {!isLoginPage && <Header />}
-      <main>{children}</main>
+      <main className="mt-[84px]">{children}</main>
       {!isLoginPage && <Footer />}
       <ScrollToTop />
     </>

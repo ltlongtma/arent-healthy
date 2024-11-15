@@ -2,7 +2,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { MENU_DROPDOWN, NAVIGATION, ROUTE } from "@/utils/constants";
-import { useRouter } from "next/navigation";
+import { useRouter, usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 
 import {
@@ -17,6 +17,7 @@ import { toast } from "sonner";
 
 export default function Header() {
   const router = useRouter();
+  const pathname = usePathname();
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
@@ -41,12 +42,15 @@ export default function Header() {
   if (!mounted) return null;
 
   return (
-    <header className="bg-primary-dark-gray text-white p-4 h-[84px]">
+    <header className="bg-primary-dark-gray text-white p-4 h-[84px] fixed z-50 top-0 w-full">
       <nav className="container mx-auto flex justify-between items-center px-10">
-        <Link href={ROUTE.HOME} onClick={(e) => {
-          e.preventDefault();
-          handleHomeClick();
-        }}>
+        <Link
+          href={ROUTE.HOME}
+          onClick={(e) => {
+            e.preventDefault();
+            handleHomeClick();
+          }}
+        >
           <Image src="/logo.png" alt="logo" width={144} height={64} priority />
         </Link>
 
@@ -54,18 +58,28 @@ export default function Header() {
           <div className="flex gap-20">
             <div className="hidden md:flex gap-10">
               {NAVIGATION.map((nav) => {
+                const isActive = pathname === nav.route;
                 return (
                   <Link
                     key={nav.route}
                     href={nav.route}
-                    className="flex items-center gap-2 hover:text-primary-orange"
+                    className={`flex items-center gap-2 hover:text-primary-orange relative ${
+                      isActive ? "text-primary-orange" : ""
+                    }`}
                   >
-                    <Image
-                      src={nav.icon}
-                      alt={nav.name}
-                      width={32}
-                      height={32}
-                    />
+                    <div className="relative">
+                      <Image
+                        src={nav.icon}
+                        alt={nav.name}
+                        width={32}
+                        height={32}
+                      />
+                      {nav.name === "お知らせ" && (
+                        <div className="absolute -top-1 -right-2 w-5 h-5 bg-primary-orange rounded-full flex items-center justify-center text-white text-xs">
+                          1
+                        </div>
+                      )}
+                    </div>
                     <span>{nav.name}</span>
                   </Link>
                 );

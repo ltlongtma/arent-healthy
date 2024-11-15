@@ -10,7 +10,7 @@ export const NAVIGATION = [
   {
     name: "自分の記録",
     icon: "/icons/note.svg",
-    route: "/records",
+    route: ROUTE.RECORDS,
   },
   {
     name: "チャレンジ",
@@ -27,7 +27,7 @@ export const NAVIGATION = [
 export const MENU_DROPDOWN = [
   {
     name: " 自分の記録",
-    route: "#",
+    route: ROUTE.RECORDS,
   },
   {
     name: "体重グラフ",
