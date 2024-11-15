@@ -19,27 +19,54 @@ const notoSansJP = Noto_Sans_JP({
 });
 
 export const metadata: Metadata = {
-  title: "Healthy | A Healthy Lifestyle",
-  description: "A Healthy Lifestyle",
-  icons: {
-    icon: [
-      { url: "/favicon/favicon.icon", type: "image/x-icon" },
-      { url: "/favicon/favicon-16x16.png", sizes: "16x16", type: "image/png" },
-      { url: "/favicon/favicon-32x32.png", sizes: "32x32", type: "image/png" },
+  // metadataBase: new URL('https://example-domain.com'),
+  title: {
+    default: "Healthy | A Healthy Lifestyle Platform",
+    template: "%s | Healthy",
+  },
+  description:
+    "Your comprehensive platform for tracking health, fitness, and maintaining a healthy lifestyle with personalized recommendations and tracking tools.",
+  keywords: [
+    "healthy lifestyle",
+    "fitness tracking",
+    "health monitoring",
+    "diet planning",
+    "exercise tracking",
+  ],
+  authors: [{ name: "Arent Company" }],
+  openGraph: {
+    type: "website",
+    locale: "ja_JP",
+    title: "Healthy | A Healthy Lifestyle Platform",
+    description:
+      "Your comprehensive platform for tracking health, fitness, and maintaining a healthy lifestyle.",
+    siteName: "Healthy",
+    images: [
+      {
+        url: "/og-image.jpg",
+        width: 1200,
+        height: 630,
+        alt: "Healthy Platform Preview",
+      },
     ],
-    // apple: [
-    //   {
-    //     url: "/favicon/apple-touch-icon.png",
-    //     sizes: "180x180",
-    //     type: "image/png",
-    //   },
-    // ],
-    // other: [
-    //   {
-    //     rel: "mask-icon",
-    //     url: "/favicon/maskable-512x512.png",
-    //   },
-    // ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Healthy | A Healthy Lifestyle Platform",
+    description:
+      "Your comprehensive platform for tracking health, fitness, and maintaining a healthy lifestyle.",
+    images: ["/og-image.jpg"],
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-video-preview": -1,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+    },
   },
 };
 
